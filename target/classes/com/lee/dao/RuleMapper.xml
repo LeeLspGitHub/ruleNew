@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dao.RuleMapper">
+
+    <!--查询全部Rule-->
+    <select id="ruleList" resultType="Rules">
+        SELECT * from cjbdi.rules
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND ruleID=#{ruleID}
+        </if>
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部Rule-->
+    <select id="ruleListCounts" resultType="int">
+        SELECT count(*) from cjbdi.rules
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND ruleID=#{ruleID}
+        </if>
+
+    </select>
+    <!--添加规则-->
+    <insert id="saveRule" parameterType="java.util.HashMap">
+         insert into cjbdi.rules(ruleName,ruleCounts,detail)
+        values (#{ruleName}, #{ruleCounts}, #{detail})
+    </insert>
+    <!--删除规则 根据id-->
+    <delete id="deleteRuleById" parameterType="java.util.HashMap">
+        delete from cjbdi.rules where ruleID=#{ruleID}
+    </delete>
+    <!--查询全部Rule-->
+    <select id="findOneRuleById" resultType="Rules" parameterType="java.util.HashMap">
+        SELECT * from cjbdi.rules
+        where ruleID=#{ruleID}
+    </select>
+    <!--更新一条Rule根据id-->
+    <update id="updateRuleById" parameterType="java.util.HashMap">
+        update cjbdi.rules
+        set ruleName = #{ruleName},
+            ruleCounts = #{ruleCounts},
+            detail = #{detail}
+        where ruleID = #{ruleID}
+    </update>
+
+</mapper>

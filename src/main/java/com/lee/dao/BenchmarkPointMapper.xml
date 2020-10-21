@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dao.BenchmarkPointMapper">
+
+    <!--查询全部起点规则-->
+    <select id="benchmarkPointList" resultType="BenchmarkPoint">
+        SELECT * from sys_benchmarkpoint
+        where 1=1
+        <if test="id != null and id !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND provinceid = #{province}
+        </if>
+        <if test="lxEnName != null and lxEnName !='' ">
+            AND lxenname LIKE CONCAT(CONCAT('%',#{lxEnName}),'%')
+        </if>
+        <if test="lxChiName != null and lxChiName !='' ">
+            AND lxchiname LIKE CONCAT(CONCAT('%',#{lxChiName}),'%')
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部基准刑规则数量-->
+    <select id="benchmarkPointListCounts" resultType="int">
+        SELECT count(*) from sys_benchmarkpoint
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND provinceid = #{province}
+        </if>
+        <if test="lxEnName != null and lxEnName !='' ">
+            AND lxenname LIKE CONCAT(CONCAT('%',#{lxEnName}),'%')
+        </if>
+        <if test="lxChiName != null and lxChiName !='' ">
+            AND lxchiname LIKE CONCAT(CONCAT('%',#{lxChiName}),'%')
+        </if>
+    </select>
+    <!--添加起点规则-->
+    <insert id="saveBenchmarkPointRule" parameterType="java.util.HashMap">
+         insert into sys_benchmarkpoint(casecause,casecauseid,startingpointnumber,province,provinceid,number,minvalues,maxvalues,standardvalues,endminvalues,endmaxvalues,conditions,conditionsname,lxenname,lxchiname,lxrely,lxrelyname,createtime,descs,createperson,note,tip,provinceitem,nationitem)
+        values (#{caseCause},#{caseCauseId}, #{startingPoint}, #{province},#{provinceId}, #{number}, #{minValues}, #{maxValues},#{standardValue},#{endMinValues}, #{endMaxValues}, #{conditions},#{conditionsName}, #{lxEnName}, #{lxChiName}, #{lxRely},#{lxRelyName},#{createTime},#{descS},#{createPerson},#{note},#{tip},#{provinceItem},#{nationItem})
+    </insert>
+    <!--删除起点规则 根据id-->
+    <delete id="deleteBenchmarkPointRuleById" parameterType="java.util.HashMap">
+        delete from sys_benchmarkpoint where id=#{id}
+    </delete>
+    <!--查询一个起点规则根据id-->
+    <select id="findOneBenchmarkPointRuleById" resultType="BenchmarkPoint" parameterType="java.util.HashMap">
+        SELECT * from sys_benchmarkpoint
+        where id=#{id}
+    </select>
+    <!--更新一条起点规则根据id-->
+    <update id="updateBenchmarkPointRule" parameterType="java.util.HashMap">
+        update sys_benchmarkpoint
+        set casecause = #{caseCause},
+            provinceid = #{provinceId},
+            casecauseid = #{caseCauseId},
+            province = #{province},
+            startingPointNumber = #{startingPointNumber},
+            number = #{number},
+            minvalues = #{minValues},
+            maxvalues = #{maxValues},
+            standardvalues = #{standardValue},
+            endminvalues = #{endMinValues},
+            endmaxvalues = #{endMaxValues},
+            conditions = #{conditions},
+            conditionsname = #{conditionsName},
+            lxenname = #{lxEnName},
+            lxchiname = #{lxChiName},
+            lxrely = #{lxRely},
+            lxrelyname = #{lxRelyName},
+            descs = #{descS},
+            note = #{note},
+            tip = #{tip},
+            provinceitem = #{provinceItem},
+            nationitem = #{nationItem},
+            updateperson = #{updatePerson},
+            updatetime = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <!--查询一个起点规则根据最大id   添加默认-->
+    <select id="getAddDefaultBenchmarkPointRule" resultType="BenchmarkPoint" parameterType="java.util.HashMap">
+        SELECT
+            t.id,t.province
+        FROM
+            sys_benchmarkpoint t
+        where  id= (select MAX(id) from sys_benchmarkpoint)
+    </select>
+    <!--查询序号的最大值-->
+    <select id="getAddMaxLxOrderBenchmarkPointRule" resultType="BenchmarkPoint" parameterType="java.util.HashMap">
+        SELECT
+            id,
+            max(number) number
+        FROM
+            sys_benchmarkpoint
+        WHERE
+            provinceid = #{province}
+        AND casecauseid = #{caseCause}
+    </select>
+</mapper>

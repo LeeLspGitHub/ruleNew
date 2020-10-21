@@ -1,0 +1,62 @@
+DEBUG [2019-12-24 11:06:34,936] org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents(ClassPathScanningCandidateComponentProvider.java:294) Identified candidate component class: file [D:\workApps\IdeaProjects\liangxing\out\artifacts\liangxing_war_exploded\WEB-INF\classes\com\lee\dao\BookMapper.class]
+DEBUG [2019-12-24 11:06:34,938] org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents(ClassPathScanningCandidateComponentProvider.java:294) Identified candidate component class: file [D:\workApps\IdeaProjects\liangxing\out\artifacts\liangxing_war_exploded\WEB-INF\classes\com\lee\dao\RuleMapper.class]
+DEBUG [2019-12-24 11:06:34,944] org.mybatis.logging.Logger.debug(Logger.java:49) Creating MapperFactoryBean with name 'bookMapper' and 'com.lee.dao.BookMapper' mapperInterface
+DEBUG [2019-12-24 11:06:34,945] org.mybatis.logging.Logger.debug(Logger.java:49) Creating MapperFactoryBean with name 'ruleMapper' and 'com.lee.dao.RuleMapper' mapperInterface
+DEBUG [2019-12-24 11:06:35,408] org.mybatis.logging.Logger.debug(Logger.java:49) Parsed configuration file: 'class path resource [mybatis-config.xml]'
+DEBUG [2019-12-24 11:06:35,410] org.mybatis.logging.Logger.debug(Logger.java:49) Property 'mapperLocations' was not specified.
+DEBUG [2019-12-24 11:06:40,416] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:06:40,428] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57afcce7] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:06:40,713] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@75a9486b [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:06:40,746] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57afcce7]
+DEBUG [2019-12-24 11:06:40,747] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:06:40,747] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5115a74f] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:06:40,748] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@91b46e1 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:06:40,750] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5115a74f]
+DEBUG [2019-12-24 11:06:46,122] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:06:46,123] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65e671bc] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:06:46,124] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@2954599 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:06:46,127] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@65e671bc]
+DEBUG [2019-12-24 11:06:46,127] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:06:46,128] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6444cbde] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:06:46,128] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@5c1c7f9c [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:06:46,130] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6444cbde]
+DEBUG [2019-12-24 11:06:50,884] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:06:50,885] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ed8c388] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:06:50,885] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@3420a8f8 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:06:50,889] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3ed8c388]
+DEBUG [2019-12-24 11:06:50,889] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:06:50,890] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39eac92a] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:06:50,890] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@109ffc83 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:06:50,891] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39eac92a]
+DEBUG [2019-12-24 11:07:06,533] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:07:06,533] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@26da811] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:07:06,533] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@895c361 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:07:06,537] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@26da811]
+DEBUG [2019-12-24 11:07:06,555] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:07:06,555] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@a733e1a] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:07:06,556] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@8b556a [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:07:06,557] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@a733e1a]
+DEBUG [2019-12-24 11:07:06,558] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:07:06,558] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7955ee5e] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:07:06,559] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@21e8fd57 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:07:06,561] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7955ee5e]
+DEBUG [2019-12-24 11:07:18,966] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:07:18,967] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66498153] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:07:18,967] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@6cb1ea23 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:07:18,970] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66498153]
+DEBUG [2019-12-24 11:07:18,983] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:07:18,983] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7bf9c4cf] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:07:18,983] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@7101afbf [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:07:18,985] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7bf9c4cf]
+DEBUG [2019-12-24 11:07:18,985] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:07:18,986] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75371667] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:07:18,986] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@5062f821 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:07:18,988] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@75371667]
+DEBUG [2019-12-24 11:07:22,969] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:07:22,969] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@33a41e90] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:07:22,970] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@395c75e0 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:07:22,971] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@33a41e90]
+DEBUG [2019-12-24 11:07:22,971] org.mybatis.logging.Logger.debug(Logger.java:49) Creating a new SqlSession
+DEBUG [2019-12-24 11:07:22,971] org.mybatis.logging.Logger.debug(Logger.java:49) SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16ef038b] was not registered for synchronization because synchronization is not active
+DEBUG [2019-12-24 11:07:22,972] org.mybatis.logging.Logger.debug(Logger.java:49) JDBC Connection [com.mchange.v2.c3p0.impl.NewProxyConnection@183f6b38 [wrapping: com.mysql.jdbc.JDBC4Connection@3e80f281]] will not be managed by Spring
+DEBUG [2019-12-24 11:07:22,972] org.mybatis.logging.Logger.debug(Logger.java:49) Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@16ef038b]

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dao.LxCommonFeaturesMapper">
+
+    <!--查询全部普通特征-->
+    <select id="lxCommonFeaturesList" resultType="LxCommonFeatures">
+        SELECT s1.id,s1.enname,s1.standardfeature,s1.mappingfeature,s1.lxplottype,s1.provinceitem,s1.nationitem,s1.legalconstraint,
+        s1.valuetype,s1.lxtype,s1.lxorder,s1.type,s1.provinceid,s1.province,s1.parentid,s1.ismultiple,s1.groupid,s1.groupidname,s1.descs,s1.createperson,s1.updateperson,s1.note,s1.tip,
+        s1.createtime,s1.updatetime,s1.auditstatus,s2.minvalues,s2.maxvalues,s2.standardvalues
+        from sys_lxcommonfeatures s1,sys_lxcommonfeaturereference s2
+        where 1=1 and  s1.id = s2.id
+        <if test="id != null and id !='' ">
+            AND s1.id=#{id}
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND s1.enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="standardFeature != null and standardFeature !='' ">
+            AND s1.standardfeature LIKE CONCAT(CONCAT('%',#{standardFeature}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND s1.provinceid = #{province}
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部普通特征数量-->
+    <select id="lxCommonFeaturesListCounts" resultType="int">
+        SELECT count(*)
+        from sys_lxcommonfeatures s1,sys_lxcommonfeaturereference s2
+        where 1=1 and  s1.id = s2.id
+        <if test="ruleID != null and ruleID !='' ">
+            AND s1.id=#{id}
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND s1.enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="standardFeature != null and standardFeature !='' ">
+            AND s1.standardfeature LIKE CONCAT(CONCAT('%',#{standardFeature}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND s1.provinceid = #{province}
+        </if>
+    </select>
+    <!--添加普通特征-->
+    <insert id="saveLxCommonFeatures" parameterType="java.util.HashMap">
+         insert into sys_lxcommonfeatures(enname,standardfeature,mappingfeature,valuetype,lxtype,type,province,provinceid,parentid,ismultiple,groupid,groupidname,createtime,lxorder,descs,createperson,note,tip,lxplottype,provinceitem,nationitem,legalconstraint)
+        values (#{enName}, #{standardFeature}, #{mappingFeature}, #{valueType}, #{lxType}, #{type}, #{province}, #{provinceId}, #{parentId}, #{isMultiple}, #{groupId},#{groupIdName}, #{createTime}, #{lxOrder},#{descS},#{createPerson},#{note},#{tip},#{lxPlotType},#{provinceItem},#{nationItem},#{legalConstraint})
+    </insert>
+    <!--添加普通特征Reference-->
+    <insert id="saveLxCommonFeaturesReference" parameterType="java.util.HashMap">
+         insert into sys_lxcommonfeaturereference(province,provinceid,enname,minvalues,maxvalues,standardvalues,lxtype)
+        values (#{province},#{provinceId},#{enName},#{minValue},#{maxValue},#{standardValue},#{lxType})
+    </insert>
+    <!--删除普通特征 根据id-->
+    <delete id="deleteLxCommonFeaturesById" parameterType="java.util.HashMap">
+        delete from sys_lxcommonfeatures where id=#{id}
+    </delete>
+    <!--删除普通特征Reference 根据id-->
+    <delete id="deleteLxCommonFeatureReferenceById" parameterType="java.util.HashMap">
+        delete from sys_lxcommonfeaturereference where id=#{id}
+    </delete>
+    <!--查询一个事实特征根据id-->
+    <select id="findOneLxCommonFeatureById" resultType="LxCommonFeatures" parameterType="java.util.HashMap">
+        SELECT s1.id,s1.enname,s1.standardfeature,s1.mappingfeature,s1.lxplottype,s1.provinceitem,s1.nationitem,s1.legalconstraint,
+        s1.valuetype,s1.lxtype,s1.lxorder,s1.type,s1.provinceid,s1.province,s1.parentid,s1.ismultiple,s1.groupid,s1.groupidname,s1.descs,s1.note,s1.tip,
+        s1.createtime,s1.updatetime,s1.auditstatus,s2.minvalues,s2.maxvalues,s2.standardvalues
+        from sys_lxcommonfeatures s1,sys_lxcommonfeaturereference s2
+        where 1=1 and  s1.id = s2.id
+        <if test="id != null and id !='' ">
+            AND s1.id=#{id}
+        </if>
+    </select>
+    <!--更新一条普通特征根据id-->
+    <update id="updateLxCommonFeatureById" parameterType="java.util.HashMap">
+        update sys_lxcommonfeatures
+        set enName = #{enName},
+            standardFeature = #{standardFeature},
+            mappingFeature = #{mappingFeature},
+            valueType = #{valueType},
+            lxtype = #{lxType},
+            lxplottype = #{lxPlotType},
+            type = #{type},
+            lxOrder = #{lxOrder},
+            province = #{province},
+            provinceId = #{provinceId},
+            parentid = #{parentId},
+            ismultiple = #{isMultiple},
+            groupid = #{groupId},
+            groupidName = #{groupIdName},
+            descs = #{descS},
+            note = #{note},
+            tip = #{tip},
+            legalconstraint = #{legalConstraint},
+            provinceitem = #{provinceItem},
+            nationitem = #{nationItem},
+            updatePerson = #{updatePerson},
+            updatetime = #{updateTime}
+        where id = #{id}
+    </update>
+    <!--更新一条普通特征Reference根据id-->
+    <update id="updateLxCommonFeatureReferenceById" parameterType="java.util.HashMap">
+        update sys_lxcommonfeaturereference
+        set enName = #{enName},
+            province = #{province},
+            minvalues = #{minValue},
+            maxvalues = #{maxValue},
+            standardvalues = #{standardValue}
+        where id = #{id}
+    </update>
+
+    <!--查询全部普通特征Reference-->
+    <select id="lxCommonFeatureReferenceList" resultType="LxCommonFeatureReference">
+        SELECT * from sys_lxcommonfeaturereference
+        where 1=1
+        <if test="id != null and id !='' ">
+            AND id=#{id}
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND province LIKE CONCAT(CONCAT('%',#{province}),'%')
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部普通特征数量-->
+    <select id="lxCommonFeatureReferenceListCounts" resultType="int">
+        SELECT count(*) from sys_lxcommonfeaturereference
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND id=#{id}
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND province LIKE CONCAT(CONCAT('%',#{province}),'%')
+        </if>
+    </select>
+    <!--查询序号的最大值-->
+    <select id="getAddMaxLxOrderCommonFeature" resultType="LxCommonFeatures" parameterType="java.util.HashMap">
+        SELECT
+            id,
+            max(lxorder) lxorder
+        FROM
+            sys_lxcommonfeatures
+        WHERE 1=1
+        AND provinceid = #{province}
+    </select>
+    <!--查询一个普通特征根据最大id   添加默认-->
+    <select id="getAddDefaultLxCommonFeature" resultType="LxCommonFeatures" parameterType="java.util.HashMap">
+        SELECT
+            t.id,t.province
+        FROM
+            sys_lxcommonfeatures t
+        where  id= (select MAX(id) from sys_lxcommonfeatures)
+    </select>
+    <!--判断英文名是否存在-->
+    <select id="isEnNameExist" resultType="LxCommonFeatures" parameterType="java.util.HashMap">
+       SELECT
+            id,enname
+       FROM
+            sys_lxcommonfeatures
+       where enname = #{enName}
+       and provinceid = #{province}
+    </select>
+    <!--判断映射特征是否存在-->
+    <select id="isChiNameExist" resultType="LxCommonFeatures" parameterType="java.util.HashMap">
+       SELECT
+            id,standardfeature
+       FROM
+            sys_lxcommonfeatures
+       where standardFeature = #{standardFeature}
+       and provinceid = #{province}
+    </select>
+    <!--查询全部映射特征-->
+    <select id="lxPlotTypeList" resultType="LxPlotType">
+        SELECT *
+        from sys_lxplottype s1
+        where 1=1
+        <if test="lxtypeid != null and lxtypeid !='' ">
+            AND s1.lxtypeid=#{lxTypeId}
+        </if>
+        <if test="lxtypename != null and lxtypename !='' ">
+            AND s1.lxtypename LIKE CONCAT(CONCAT('%',#{lxTypeName}),'%')
+        </if>
+        order by s1.lxtypeid desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部映射特征数量-->
+    <select id="lxPlotTypeListCounts" resultType="int">
+        SELECT count(*)
+        from sys_lxplottype s1
+        where 1=1
+        <if test="lxtypeid != null and lxtypeid !='' ">
+            AND s1.lxtypeid=#{lxTypeId}
+        </if>
+        <if test="lxtypename != null and lxtypename !='' ">
+            AND s1.lxtypename LIKE CONCAT(CONCAT('%',#{lxTypeName}),'%')
+        </if>
+    </select>
+</mapper>

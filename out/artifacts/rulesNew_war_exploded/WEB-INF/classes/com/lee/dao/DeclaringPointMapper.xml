@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dao.DeclaringPointMapper">
+
+    <!--查询全部起点规则-->
+    <select id="declaringPointList" resultType="DeclaringPoint">
+        SELECT * from sys_declaringpoint
+        where 1=1
+        <if test="id != null and id !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecause LIKE CONCAT(CONCAT('%',#{caseCause}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND province LIKE CONCAT(CONCAT('%',#{province}),'%')
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部起点规则数量-->
+    <select id="declaringPointListCounts" resultType="int">
+        SELECT count(*) from sys_declaringpoint
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecause LIKE CONCAT(CONCAT('%',#{caseCause}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND province LIKE CONCAT(CONCAT('%',#{province}),'%')
+        </if>
+    </select>
+    <!--添加起点规则-->
+    <insert id="saveDeclaringPointRule" parameterType="java.util.HashMap">
+         insert into sys_declaringpoint(casecause,province,conditions)
+        values (#{caseCause}, #{province}, #{conditions})
+    </insert>
+    <!--删除起点规则 根据id-->
+    <delete id="deleteDeclaringPointRuleById" parameterType="java.util.HashMap">
+        delete from sys_declaringpoint where id=#{id}
+    </delete>
+    <!--查询一个起点规则根据id-->
+    <select id="findOneDeclaringPointRuleById" resultType="DeclaringPoint" parameterType="java.util.HashMap">
+        SELECT * from sys_declaringpoint
+        where id=#{id}
+    </select>
+    <!--更新一条起点规则根据id-->
+    <update id="updateDeclaringPointRule" parameterType="java.util.HashMap">
+        update sys_declaringpoint
+        set casecause = #{caseCause},
+            province = #{province},
+            conditions = #{conditions}
+        where id = #{id}
+    </update>
+
+    <!--查询一个起点规则根据最大id   添加默认-->
+    <select id="getAddDefaultDeclaringPointRule" resultType="DeclaringPoint" parameterType="java.util.HashMap">
+        SELECT
+            t.id,t.province
+        FROM
+            sys_declaringpoint t
+        where  id= (select MAX(id) from sys_declaringpoint)
+    </select>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="com.lee.pojo"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="com/lee/dao/BookMapper.xml"/>
+        <mapper resource="com/lee/dao/RuleMapper.xml"/>
+        <mapper resource="com/lee/dao/FactFeaturesMapper.xml"/>
+        <mapper resource="com/lee/dao/LxCommonFeaturesMapper.xml"/>
+        <mapper resource="com/lee/dao/StartPointMapper.xml"/>
+        <mapper resource="com/lee/dao/BenchmarkPointMapper.xml"/>
+        <mapper resource="com/lee/dao/DeclaringPointMapper.xml"/>
+        <mapper resource="com/lee/dao/UserMapper.xml"/>
+        <mapper resource="com/lee/dao/RoleMapper.xml"/>
+        <mapper resource="com/lee/dao/MenuMapper.xml"/>
+        <mapper resource="com/lee/dao/LogMapper.xml"/>
+        <mapper resource="com/lee/dao/AuthorityMapper.xml"/>
+        <mapper resource="com/lee/dao/LxFeaturesRoleMapper.xml"/>
+        <mapper resource="com/lee/dao/DeclarationPenaltyMapper.xml"/>
+        <mapper resource="com/lee/dao/ConflictMapper.xml"/>
+    </mappers>
+
+</configuration>

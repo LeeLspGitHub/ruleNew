@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dao.ConflictMapper">
+
+    <!--查询全部起点规则-->
+    <select id="ConflictList" resultType="Conflict">
+        SELECT * FROM
+        sys_conflict
+        where 1=1
+        <if test="id != null and id !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND provinceid = #{province}
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部基准刑规则数量-->
+    <select id="ConflictListCounts" resultType="int">
+        SELECT count(*) from sys_conflict
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND provinceid = #{province}
+        </if>
+    </select>
+    <!--添加起点规则-->
+    <insert id="saveConflict" parameterType="java.util.HashMap">
+         insert into sys_conflict(casecause,casecauseid,province,provinceid,enname,createtime,createperson,descs)
+        values (#{caseCause},#{caseCauseId},  #{province},#{provinceId},#{enName},#{createTime},#{createPerson},#{descS})
+    </insert>
+    <!--删除起点规则 根据id-->
+    <delete id="deleteConflictById" parameterType="java.util.HashMap">
+        delete from sys_conflict where id=#{id}
+    </delete>
+    <!--查询一个起点规则根据id-->
+    <select id="findOneConflictById" resultType="Conflict" parameterType="java.util.HashMap">
+        SELECT * FROM
+            sys_conflict
+        where id=#{id}
+    </select>
+    <!--更新一条起点规则根据id-->
+    <update id="updateConflict" parameterType="java.util.HashMap">
+        update sys_conflict
+        set casecause = #{caseCause},
+            provinceid = #{provinceId},
+            casecauseid = #{caseCauseId},
+            province = #{province},
+            enname = #{enName},
+            descs = #{descS},
+            updateperson = #{updatePerson},
+            updatetime = #{updateTime}
+        where id = #{id}
+    </update>
+</mapper>

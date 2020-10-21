@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/mvc
+    https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 配置SpringMVC -->
+    <!-- 1.开启SpringMVC注解驱动 -->
+    <mvc:annotation-driven />
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <value>application/json;charset=UTF-8</value>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+                <bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter" />
+                <bean class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+    <!-- 2.静态资源默认servlet配置-->
+    <mvc:default-servlet-handler/>
+
+    <!-- 3.配置jsp 显示ViewResolver视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- 4.扫描web相关的bean -->
+    <context:component-scan base-package="com.lee.controller" />
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 上传文件大小限制 -->
+        <property name="maxUploadSize">
+            <value>10485760</value>
+        </property>
+        <!-- 请求的编码格式, 和 jsp 页面一致 -->
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+
+    <!-- 后台访问拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:mapping path="/system/*"/>
+            <mvc:mapping path="/features/*"/>
+            <mvc:mapping path="/commonfeatures/*"/>
+            <mvc:mapping path="/startpoint/*"/>
+            <mvc:mapping path="/benchmarkpoint/*"/>
+            <mvc:mapping path="/lxfeaturesrole/*"/>
+            <mvc:mapping path="/declarationpenalty/*"/>
+            <mvc:exclude-mapping path="/system/login"/>
+            <mvc:exclude-mapping path="/system/get_cpacha"/>
+            <mvc:exclude-mapping path="/resources/**"/>
+            <bean class="com.lee.interceptor.admin.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- 开启事务 -->
+    <tx:annotation-driven/>
+
+</beans>

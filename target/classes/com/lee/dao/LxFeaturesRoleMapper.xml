@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dao.LxFeaturesRoleMapper">
+
+    <!--查询全部条件限制-->
+    <select id="lxFeaturesRoleList" resultType="LxFeaturesRole">
+        SELECT * from sys_lxfeaturesrole
+        where 1=1
+        <if test="id != null and id !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND provinceid = #{province}
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部条件限制数量-->
+    <select id="lxFeaturesRoleListCounts" resultType="int">
+        SELECT count(*) from sys_lxfeaturesrole
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND provinceid = #{province}
+        </if>
+    </select>
+    <!--添加起点规则-->
+    <insert id="saveLxFeaturesRole" parameterType="java.util.HashMap">
+         insert into sys_lxfeaturesrole(casecause,casecauseid,province,provinceid,lxtype,lowerlimit,upperlimit,conditions,conditionsname,createtime,createperson,descs,note)
+        values (#{caseCause},#{caseCauseId}, #{province},#{provinceId}, #{lxType}, #{lowerLimit},#{upperLimit}, #{conditions},#{conditionsName},#{createTime},#{createPerson},#{descS},#{note})
+    </insert>
+    <!--删除起点规则 根据id-->
+    <delete id="deleteLxFeaturesRoleById" parameterType="java.util.HashMap">
+        delete from sys_lxfeaturesrole where id=#{id}
+    </delete>
+    <!--查询一个起点规则根据id-->
+    <select id="findOneLxFeatureRoleById" resultType="LxFeaturesRole" parameterType="java.util.HashMap">
+        SELECT * from sys_lxfeaturesrole
+        where id=#{id}
+    </select>
+    <!--更新一条起点规则根据id-->
+    <update id="updateLxFeatureRole" parameterType="java.util.HashMap">
+        update sys_lxfeaturesrole
+        set casecause = #{caseCause},
+            provinceid = #{provinceId},
+            casecauseid = #{caseCauseId},
+            province = #{province},
+            lxtype = #{lxType},
+            lowerlimit = #{lowerLimit},
+            upperlimit = #{upperLimit},
+            conditions = #{conditions},
+            conditionsname = #{conditionsName},
+            descs = #{descS},
+            note = #{note},
+            updateperson = #{updatePerson},
+            updatetime = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <!--查询一个起点规则根据最大id   添加默认-->
+    <select id="getAddDefaultBenchmarkPointRule" resultType="BenchmarkPoint" parameterType="java.util.HashMap">
+        SELECT
+            t.id,t.province
+        FROM
+            sys_lxfeaturesrole t
+        where  id= (select MAX(id) from sys_benchmarkpoint)
+    </select>
+    <!--查询序号的最大值-->
+    <select id="getAddMaxLxOrderBenchmarkPointRule" resultType="BenchmarkPoint" parameterType="java.util.HashMap">
+        SELECT
+            id,
+            max(number) number
+        FROM
+            sys_lxfeaturesrole
+        WHERE
+            provinceid = #{province}
+        AND casecauseid = #{caseCause}
+    </select>
+</mapper>

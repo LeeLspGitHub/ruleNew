@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dao.FactFeaturesMapper">
+
+    <!--查询全部事实特征-->
+    <select id="factFeaturesList" resultType="FactFeatures">
+        SELECT s1.id,s1.casecauseid,s1.casecause,s1.enname,s1.standardfeature,s1.mappingfeature,s1.mappingfeaturename,s1.lxplottype,s1.startpointnumber,s1.provinceitem,s1.nationitem,s1.provincecasecauseitem,s1.adjustedmaxvalue,
+        s1.valuetype,s1.type,s1.lxtype,s1.unit,s1.lxorder,s1.lxrely,s1.lxrelyname,s1.provinceid,s1.province,s1.parentid,s1.ismultiple,s1.groupid,s1.groupidname,s1.descs,s1.createperson,s1.updateperson,s1.note,s1.tip,
+        s1.createtime,s1.updatetime,s1.auditstatus,s2.minvalues,s2.maxvalues,s2.standardvalues
+        from sys_factfeatures s1,sys_factfeaturereference s2
+        where 1=1 and  s1.id = s2.id
+        <if test="id != null and id !='' ">
+            AND s1.id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND s1.casecauseid = #{caseCause}
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND s1.enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="standardFeature != null and standardFeature !='' ">
+            AND s1.standardfeature LIKE CONCAT(CONCAT('%',#{standardFeature}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND s1.provinceid = #{province}
+        </if>
+        <if test="type != null and type !='' ">
+            AND s1.type = #{type}
+        </if>
+        union
+        SELECT s3.id,s3.casecauseid,s3.casecause,s3.enname,s3.standardfeature,s3.mappingfeature,s3.mappingfeaturename,s3.lxplottype,s3.startpointnumber,s3.provinceitem,s3.nationitem,s3.provincecasecauseitem,s3.adjustedmaxvalue,
+        s3.valuetype,s3.type,s3.lxtype,'' unit,s3.lxorder,s3.lxrely,s3.lxrelyname,s3.provinceid,s3.province,s3.parentid,s3.ismultiple,s3.groupid,s3.groupidname,s3.descs,s3.createperson,s3.updateperson,s3.note,s3.tip,
+        s3.createtime,s3.updatetime,s3.auditstatus,s4.minvalues,s4.maxvalues,s4.standardvalues
+        from sys_lxfeatures s3,sys_lxfeaturereference s4
+        where 1=1 and  s3.id = s4.id
+        <if test="id != null and id !='' ">
+            AND s3.id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND s3.casecauseid = #{caseCause}
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND s3.enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="standardFeature != null and standardFeature !='' ">
+            AND s3.standardfeature LIKE CONCAT(CONCAT('%',#{standardFeature}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND s3.provinceid = #{province}
+        </if>
+        <if test="type != null and type !='' ">
+            AND s3.type = #{type}
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部事实特征数量-->
+    <select id="factFeaturesListCounts" resultType="int">
+        SELECT count(*) from
+        (
+        SELECT s1.id,s1.casecauseid,s1.casecause,s1.enname,s1.standardfeature,s1.mappingfeature,s1.mappingfeaturename,s1.lxplottype,s1.startpointnumber,s1.provinceitem,s1.nationitem,s1.provincecasecauseitem,s1.adjustedmaxvalue,
+        s1.valuetype,s1.type,s1.lxtype,s1.unit,s1.lxorder,s1.lxrely,s1.lxrelyname,s1.provinceid,s1.province,s1.parentid,s1.ismultiple,s1.groupid,s1.descs,s1.createperson,s1.updateperson,s1.note,s1.tip,
+        s1.createtime,s1.updatetime,s1.auditstatus,s2.minvalues,s2.maxvalues,s2.standardvalues
+        from sys_factfeatures s1,sys_factfeaturereference s2
+        where 1=1 and  s1.id = s2.id
+        <if test="id != null and id !='' ">
+            AND s1.id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND s1.casecauseid = #{caseCause}
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND s1.enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="standardFeature != null and standardFeature !='' ">
+            AND s1.standardfeature LIKE CONCAT(CONCAT('%',#{standardFeature}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND s1.provinceid = #{province}
+        </if>
+        <if test="type != null and type !='' ">
+            AND s1.type = #{type}
+        </if>
+        union
+        SELECT s3.id,s3.casecauseid,s3.casecause,s3.enname,s3.standardfeature,s3.mappingfeature,s3.mappingfeaturename,s3.lxplottype,s3.startpointnumber,s3.provinceitem,s3.nationitem,s3.provincecasecauseitem,s3.adjustedmaxvalue,
+        s3.valuetype,s3.type,s3.lxtype,'' unit,'' lxorder,s3.lxrely,s3.lxrelyname,s3.provinceid,s3.province,s3.parentid,s3.ismultiple,s3.groupid,s3.descs,'' createperson,'' updateperson,'' note,'' tip,
+        '' createtime,'' updatetime,'' auditstatus,s4.minvalues,s4.maxvalues,s4.standardvalues
+        from sys_lxfeatures s3,sys_lxfeaturereference s4
+        where 1=1 and  s3.id = s4.id
+        <if test="id != null and id !='' ">
+            AND s3.id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND s3.casecauseid = #{caseCause}
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND s3.enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="standardFeature != null and standardFeature !='' ">
+            AND s3.standardfeature LIKE CONCAT(CONCAT('%',#{standardFeature}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND s3.provinceid = #{province}
+        </if>
+        <if test="type != null and type !='' ">
+            AND s3.type = #{type}
+        </if>
+        order by id desc
+        ) c1
+    </select>
+    <!--查询全部事实特征Reference-->
+    <select id="factFeatureReferenceList" resultType="FactFeatureReference">
+        SELECT * from sys_factfeaturereference
+        where 1=1
+        <if test="id != null and id !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecause LIKE CONCAT(CONCAT('%',#{caseCause}),'%')
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND province LIKE CONCAT(CONCAT('%',#{province}),'%')
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部事实特征数量-->
+    <select id="factFeatureReferenceListCounts" resultType="int">
+        SELECT count(*) from sys_factfeaturereference
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecause LIKE CONCAT(CONCAT('%',#{caseCause}),'%')
+        </if>
+        <if test="enName != null and enName !='' ">
+            AND enname LIKE CONCAT(CONCAT('%',#{enName}),'%')
+        </if>
+        <if test="province != null and province !='' ">
+            AND province LIKE CONCAT(CONCAT('%',#{province}),'%')
+        </if>
+    </select>
+
+    <!--查询全部映射特征-->
+    <select id="mappingFeatureList" resultType="MappingFeatures">
+        SELECT *
+        from sys_mappingfeature s1
+        where 1=1
+        <if test="code != null and code !='' ">
+            AND s1.code=#{code}
+        </if>
+        <if test="name != null and name !='' ">
+            AND s1.name LIKE CONCAT(CONCAT('%',#{name}),'%')
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid=#{caseCause}
+        </if>
+        order by s1.code desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部映射特征数量-->
+    <select id="mappingFeatureListCounts" resultType="int">
+        SELECT count(*)
+        from sys_mappingfeature s1
+        where 1=1
+        <if test="code != null and code !='' ">
+            AND s1.code=#{code}
+        </if>
+        <if test="name != null and name !='' ">
+            AND s1.name LIKE CONCAT(CONCAT('%',#{name}),'%')
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid=#{caseCause}
+        </if>
+    </select>
+    <!--查询全部事实特征Reference-->
+    <!--添加事实特征-->
+    <insert id="saveFactFeatures" parameterType="java.util.HashMap">
+         insert into sys_factfeatures(casecause,casecauseid,enname,standardfeature,mappingfeature,mappingfeaturename,valuetype,type,lxtype,unit,lxorder,lxrely,lxrelyname,province,provinceid,createtime,auditstatus,parentid,ismultiple,groupid,descs,createperson,note,tip,groupidname,lxplottype,startpointnumber,provinceitem,nationitem,provincecasecauseitem,adjustedmaxvalue)
+        values (#{caseCause}, #{caseCauseId}, #{enName}, #{standardFeature}, #{mappingFeature},#{mappingFeatureName}, #{valueType}, #{type},#{lxType}, #{unit}, #{lxOrder}, #{lxRely},#{lxRelyName}, #{province}, #{provinceId},#{createTime},#{auditStatus},#{parentId},#{isMultiple},#{groupId},#{descS},#{createPerson},#{note},#{tip},#{groupIdName},#{lxPlotType},#{startingPointNumber},#{provinceItem},#{nationItem},#{provinceCaseCauseItem},#{adjustedMaxvalue})
+    </insert>
+    <!--添加事实特征Reference-->
+    <insert id="saveFactFeaturesReference" parameterType="java.util.HashMap">
+         insert into sys_factfeaturereference(casecause,casecauseid,province,provinceid,enname,minvalues,maxvalues,standardvalues)
+        values (#{caseCause},#{caseCauseId},#{province},#{provinceId},#{enName},#{minValue},#{maxValue},#{standardValue})
+    </insert>
+    <!--添加LxFeatures-->
+    <insert id="saveLxFeatures" parameterType="java.util.HashMap">
+         insert into sys_lxfeatures(casecause,casecauseid,enname,standardfeature,mappingfeature,mappingfeaturename,valuetype,type,lxtype,province,provinceid,lxorder,createtime,auditstatus,parentid,ismultiple,groupid,descs,createperson,note,tip,groupidname,lxplottype,lxrely,lxrelyname,startpointnumber,provinceitem,nationitem,provincecasecauseitem,adjustedmaxvalue)
+        values (#{caseCause}, #{caseCauseId}, #{enName}, #{standardFeature}, #{mappingFeature},#{mappingFeatureName}, #{valueType}, #{type},#{lxType},#{province}, #{provinceId}, #{lxOrder}, #{createTime},#{auditStatus},#{parentId},#{isMultiple},#{groupId},#{descS},#{createPerson},#{note},#{tip},#{groupIdName},#{lxPlotType},#{lxRely},#{lxRelyName},#{startingPointNumber},#{provinceItem},#{nationItem},#{provinceCaseCauseItem},#{adjustedMaxvalue})
+    </insert>
+    <!--添加LxFeatureReference-->
+    <insert id="saveLxFeatureReference" parameterType="java.util.HashMap">
+         insert into sys_lxfeaturereference(casecause,casecauseid,enname,province,provinceid,minvalues,maxvalues,standardvalues,lxtype)
+        values (#{caseCause}, #{caseCauseId}, #{enName}, #{province}, #{provinceId},#{minValue},#{maxValue},#{standardValue},#{lxType})
+    </insert>
+    <!--添加DeclaringPoint-->
+    <insert id="saveDeclaringPointRule" parameterType="java.util.HashMap">
+         insert into sys_declaringpoint(casecause,province,conditions)
+        values (#{caseCause}, #{province}, #{conditions})
+    </insert>
+    <!--查询序号的最大值-->
+    <select id="getAddMaxLxOrderFactFeature" resultType="FactFeatures" parameterType="java.util.HashMap">
+        SELECT
+            id,
+            max(lxorder) lxorder
+        FROM
+            sys_factfeatures
+        WHERE
+            provinceid = #{province}
+        AND casecauseid = #{caseCause}
+    </select>
+    <!--删除事实特征 根据id-->
+    <delete id="deleteFactFeaturesById" parameterType="java.util.HashMap">
+        delete from sys_factfeatures where id=#{id}
+    </delete>
+    <!--删除事实特征Reference 根据id-->
+    <delete id="deleteFactFeatureReferenceById" parameterType="java.util.HashMap">
+        delete from sys_factfeaturereference where id=#{id}
+    </delete>
+    <!--删除事实特征Lx 根据id-->
+    <delete id="deleteLxFeaturesById" parameterType="java.util.HashMap">
+        delete from sys_lxfeatures where id=#{id}
+    </delete>
+    <!--删除事实特征LxReference 根据id-->
+    <delete id="deleteLxFeatureReferenceById" parameterType="java.util.HashMap">
+        delete from sys_lxfeaturereference where id=#{id}
+    </delete>
+    <!--查询一个事实特征根据id-->
+    <select id="findOneFactFeatureById" resultType="FactFeatures" parameterType="java.util.HashMap">
+        SELECT s1.id,s1.casecauseid,s1.casecause,s1.enname,s1.standardfeature,s1.mappingfeature,s1.mappingfeaturename,s1.lxplottype,s1.startpointnumber,s1.provinceitem,s1.nationitem,s1.provincecasecauseitem,s1.adjustedmaxvalue,
+        s1.valuetype,s1.type,s1.unit,s1.lxorder,s1.lxtype,s1.lxrely,s1.lxrelyname,s1.provinceid,s1.province,s1.parentid,s1.ismultiple,s1.groupid,s1.descs,s1.createperson,s1.updateperson,s1.note,s1.tip,s1.groupidname,
+        s1.createtime,s1.updatetime,s1.auditstatus,s2.minvalues,s2.maxvalues,s2.standardvalues
+        from sys_factfeatures s1,sys_factfeaturereference s2
+        where 1=1 and  s1.id = s2.id
+        <if test="id != null and id !='' ">
+            AND s1.id=#{id}
+        </if>
+    </select>
+    <!--查询一个LX特征根据id-->
+    <select id="findOnelxFeatureById" resultType="FactFeatures" parameterType="java.util.HashMap">
+        SELECT s1.id,s1.casecauseid,s1.casecause,s1.enname,s1.standardfeature,s1.mappingfeature,s1.mappingfeaturename,s1.lxplottype,s1.startpointnumber,s1.provinceitem,s1.nationitem,s1.provincecasecauseitem,s1.adjustedmaxvalue,
+        s1.valuetype,s1.type,s1.lxtype,s1.lxorder,s1.lxrely,s1.lxrelyname,s1.provinceid,s1.province,s1.parentid,s1.ismultiple,s1.groupid,s1.descs,s1.createperson,s1.updateperson,s1.note,s1.tip,s1.groupidname,
+        s1.createtime,s1.updatetime,s1.auditstatus,s2.minvalues,s2.maxvalues,s2.standardvalues
+        from sys_lxfeatures s1,sys_lxfeaturereference s2
+        where 1=1 and  s1.id = s2.id
+        <if test="id != null and id !='' ">
+            AND s1.id=#{id}
+        </if>
+    </select>
+    <!--更新一条Rule根据id-->
+    <update id="updateFactFeatureById" parameterType="java.util.HashMap">
+        update sys_factfeatures
+        set caseCause = #{caseCause},
+            casecauseid = #{caseCauseId},
+            enName = #{enName},
+            standardFeature = #{standardFeature},
+            mappingFeature = #{mappingFeature},
+            mappingfeaturename = #{mappingFeatureName},
+            valueType = #{valueType},
+            type = #{type},
+            lxtype = #{lxType},
+            lxplottype = #{lxPlotType},
+            unit = #{unit},
+            lxOrder = #{lxOrder},
+            province = #{province},
+            provinceid = #{provinceId},
+            lxrely = #{lxRely},
+            lxrelyname = #{lxRelyName},
+            parentid = #{parentId},
+            ismultiple = #{isMultiple},
+            groupid = #{groupId},
+            groupidname = #{groupIdName},
+            descs = #{descS},
+            note = #{note},
+            tip = #{tip},
+            provinceitem = #{provinceItem},
+            nationitem = #{nationItem},
+            provincecasecauseitem = #{provinceCaseCauseItem},
+            adjustedmaxvalue = #{adjustedMaxvalue},
+            startpointnumber = #{startingPointNumber},
+            updateperson = #{updatePerson},
+            updatetime = #{updateTime}
+        where id = #{id}
+    </update>
+    <!--更新一条事实特征Reference根据id-->
+    <update id="updateFactFeatureReferenceById" parameterType="java.util.HashMap">
+        update sys_factfeaturereference
+        set caseCause = #{caseCause},
+            casecauseid = #{caseCauseId},
+            enName = #{enName},
+            province = #{province},
+            provinceId = #{provinceId},
+            minvalues = #{minValue},
+            maxvalues = #{maxValue},
+            standardvalues = #{standardValue}
+        where id = #{id}
+    </update>
+    <!--更新一条Rule根据id-->
+    <update id="updateLxFeatureById" parameterType="java.util.HashMap">
+        update sys_lxfeatures
+        set caseCause = #{caseCause},
+            casecauseid = #{caseCauseId},
+            enName = #{enName},
+            standardFeature = #{standardFeature},
+            mappingFeature = #{mappingFeature},
+            mappingfeaturename = #{mappingFeatureName},
+            valueType = #{valueType},
+            type = #{type},
+            lxtype = #{lxType},
+            lxplottype = #{lxPlotType},
+            lxOrder = #{lxOrder},
+            lxrely = #{lxRely},
+            lxrelyname = #{lxRelyName},
+            province = #{province},
+            provinceId = #{provinceId},
+            parentid = #{parentId},
+            ismultiple = #{isMultiple},
+            groupid = #{groupId},
+            descs = #{descS},
+            note = #{note},
+            tip = #{tip},
+            provinceitem = #{provinceItem},
+            nationitem = #{nationItem},
+            provincecasecauseitem = #{provinceCaseCauseItem},
+            adjustedmaxvalue = #{adjustedMaxvalue},
+            startpointnumber = #{startingPointNumber},
+            updateperson = #{updatePerson},
+            updatetime = #{updateTime}
+        where id = #{id}
+    </update>
+    <!--更新一条Rule根据id-->
+    <update id="updateLxFeatureReferenceById" parameterType="java.util.HashMap">
+        update sys_lxfeaturereference
+        set caseCause = #{caseCause},
+            casecauseid = #{caseCauseId},
+            enName = #{enName},
+            province = #{province},
+            provinceId = #{provinceId},
+            lxtype = #{lxType},
+            minvalues = #{minValue},
+            maxvalues = #{maxValue},
+            standardvalues = #{standardValue}
+        where id = #{id}
+    </update>
+
+    <!--查询一个事实特征根据最大id   添加默认-->
+    <select id="getAddDefaultFactFeature" resultType="FactFeatures" parameterType="java.util.HashMap">
+        SELECT
+            t.casecause,t.province
+        FROM
+            sys_factfeatures t
+        where  id= (select MAX(id) from sys_factfeatures)
+    </select>
+    <!--判断英文名是否存在-->
+    <select id="isEnNameExist" resultType="FactFeatures" parameterType="java.util.HashMap">
+       SELECT
+            id,enname
+       FROM
+            sys_factfeatures
+       where enname = #{enName}
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND provinceid = #{province}
+        </if>
+    </select>
+    <!--判断映射特征是否存在-->
+    <select id="isChiNameExist" resultType="FactFeatures" parameterType="java.util.HashMap">
+       SELECT
+            id,standardfeature
+       FROM
+            sys_factfeatures
+       where standardFeature = #{standardFeature}
+       and provinceid = #{province}
+       and casecauseid = #{caseCause}
+    </select>
+
+    <!--判断英文名是否存在-->
+    <select id="isEnNameExist4" resultType="FactFeatures" parameterType="java.util.HashMap">
+       SELECT
+            id,enname
+       FROM
+            sys_lxfeatures
+       where enname = #{enName}
+        <if test="caseCause != null and caseCause !='' ">
+            AND casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND provinceid = #{province}
+        </if>
+    </select>
+    <!--判断映射特征是否存在-->
+    <select id="isChiNameExist4" resultType="FactFeatures" parameterType="java.util.HashMap">
+       SELECT
+            id,standardfeature
+       FROM
+            sys_lxfeatures
+       where standardFeature = #{standardFeature}
+       and provinceid = #{province}
+       and casecauseid = #{caseCause}
+    </select>
+
+    <!--判断事实特征个罪特征是否存在-->
+    <select id="isFactLxExit" resultType="FactFeatures" parameterType="java.util.HashMap">
+    select * from (
+    select s1.id,s1.enname,s1.provinceid,s1.province,s1.casecauseid,s1.casecause from sys_factfeatures s1
+    UNION
+    select s2.id,s2.enname,s2.provinceid,s2.province,s2.casecauseid,s2.casecause from sys_lxfeatures s2 ) c1
+       where enname = #{enName}
+       and provinceid = #{province}
+       and casecauseid = #{caseCause}
+    </select>
+
+</mapper>

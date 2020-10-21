@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 扫描service相关的bean -->
+    <context:component-scan base-package="com.lee.service" />
+
+    <!--BookServiceImpl注入到IOC容器中-->
+    <bean id="BookServiceImpl" class="com.lee.service.BookServiceImpl">
+        <property name="bookMapper" ref="bookMapper"/>
+    </bean>
+    <bean id="RuleServiceImpl" class="com.lee.service.RuleServiceImpl">
+        <property name="ruleMapper" ref="ruleMapper"/>
+    </bean>
+    <bean id="FactFeaturesServiceImpl" class="com.lee.service.FactFeaturesServiceImpl">
+        <property name="factFeaturesMapper" ref="factFeaturesMapper"/>
+    </bean>
+    <bean id="LxCommonFeaturesServiceImpl" class="com.lee.service.LxCommonFeaturesServiceImpl">
+        <property name="lxCommonFeaturesMapper" ref="lxCommonFeaturesMapper"/>
+    </bean>
+    <bean id="StartPointServiceImpl" class="com.lee.service.StartPointServiceImpl">
+        <property name="startPointMapper" ref="startPointMapper"/>
+    </bean>
+    <bean id="BenchmarkPointServiceImpl" class="com.lee.service.BenchmarkPointServiceImpl">
+        <property name="benchmarkPointMapper" ref="benchmarkPointMapper"/>
+    </bean>
+    <bean id="DeclaringPointServiceImpl" class="com.lee.service.DeclaringPointServiceImpl">
+        <property name="declaringPointMapper" ref="declaringPointMapper"/>
+    </bean>
+    <bean id="LxFeaturesRoleServiceImpl" class="com.lee.service.LxFeaturesRoleServiceImpl">
+        <property name="lxFeaturesRoleMapper" ref="lxFeaturesRoleMapper"/>
+    </bean>
+    <bean id="DeclarationPenaltyServiceImpl" class="com.lee.service.DeclarationPenaltyServiceImpl">
+        <property name="declarationPenaltyMapper" ref="declarationPenaltyMapper"/>
+    </bean>
+    <bean id="ConflictServiceImpl" class="com.lee.service.ConflictServiceImpl">
+        <property name="conflictMapper" ref="conflictMapper"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 4.aop事务支持  事务支持在mvc 配置文件中配置 -->
+
+</beans>

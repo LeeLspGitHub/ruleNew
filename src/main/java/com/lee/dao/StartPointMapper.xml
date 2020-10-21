@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lee.dao.StartPointMapper">
+
+    <!--查询全部起点规则-->
+    <select id="startPointList" resultType="StartingPoint">
+        SELECT * from sys_startingpoint s1
+        where 1=1
+        <if test="id != null and id !='' ">
+            AND id=#{id}
+        </if>
+        <if test="descS != null and descS !='' ">
+            AND s1.descs LIKE CONCAT(CONCAT('%',#{descS}),'%')
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND s1.casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND s1.provinceid = #{province}
+        </if>
+        order by id desc
+        limit ${pageNO},${pageSize}
+    </select>
+    <!--查询全部起点规则数量-->
+    <select id="startPointListCounts" resultType="int">
+        SELECT count(*) from sys_startingpoint s1
+        where 1=1
+        <if test="ruleID != null and ruleID !='' ">
+            AND id=#{id}
+        </if>
+        <if test="caseCause != null and caseCause !='' ">
+            AND s1.casecauseid = #{caseCause}
+        </if>
+        <if test="province != null and province !='' ">
+            AND s1.provinceid = #{province}
+        </if>
+    </select>
+    <!--添加起点规则-->
+    <insert id="saveStartPointRule" parameterType="java.util.HashMap">
+         insert into sys_startingpoint(casecause,casecauseid,province,provinceid,number,minvalues,maxvalues,standardvalues,conditions,conditionsname,createtime,provinceitem,nationitem,descs,createperson,note,tip)
+        values (#{caseCause},#{caseCauseId}, #{province}, #{provinceId}, #{number}, #{minValue}, #{maxValue}, #{standardValue}, #{conditions}, #{conditionsName},#{createTime},#{provinceItem},#{nationItem},#{descS},#{createPerson},#{note},#{tip})
+    </insert>
+    <!--删除起点规则 根据id-->
+    <delete id="deteleStartPointRule" parameterType="java.util.HashMap">
+        delete from sys_startingpoint where id=#{id}
+    </delete>
+    <!--查询一个起点规则根据id-->
+    <select id="findOneStartPointRuleById" resultType="StartingPoint" parameterType="java.util.HashMap">
+        SELECT * from sys_startingpoint
+        where id=#{id}
+    </select>
+    <!--更新一条起点规则根据id-->
+    <update id="updateStartPointRule" parameterType="java.util.HashMap">
+        update sys_startingpoint
+        set casecause = #{caseCause},
+            casecauseid = #{caseCauseId},
+            province = #{province},
+            provinceid = #{provinceId},
+            number = #{number},
+            minvalues = #{minValue},
+            maxvalues = #{maxValue},
+            standardvalues = #{standardValue},
+            conditions = #{conditions},
+            conditionsname = #{conditionsName},
+            provinceitem = #{provinceItem},
+            nationitem = #{nationItem},
+            descs = #{descS},
+            note = #{note},
+            tip = #{tip},
+            updateperson = #{updatePerson},
+            updatetime = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <!--查询一个起点规则根据最大id   添加默认-->
+    <select id="getAddDefaultStartPointRule" resultType="StartingPoint" parameterType="java.util.HashMap">
+        SELECT
+            t.id,t.province
+        FROM
+            sys_startingpoint t
+        where  id= (select MAX(id) from sys_startingpoint)
+    </select>
+    <!--查询序号的最大值-->
+    <select id="getAddMaxLxOrderStartPointRule" resultType="StartingPoint" parameterType="java.util.HashMap">
+        SELECT
+            id,
+            max(number) number
+        FROM
+            sys_startingpoint
+        WHERE
+            provinceid = #{province}
+        AND casecauseid = #{caseCause}
+    </select>
+</mapper>
