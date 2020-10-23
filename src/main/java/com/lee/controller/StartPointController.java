@@ -307,12 +307,7 @@ public class StartPointController {
         try{
             List<StartingPoint> list = startPointService.getAddMaxLxOrderStartPointRule(maxOrderCondition);
             StartingPoint startingPoint = list.get(0);
-            if(startingPoint != null){
-                String fforder = startingPoint.getNumber();
-                if(fforder!=null && !"".equals(fforder)){
-                    startingPoint.setNumber(String.valueOf(Integer.parseInt(fforder)+1));
-                }
-            }
+
             result.put("list",list);
 
         }catch (Exception e){
@@ -321,5 +316,17 @@ public class StartPointController {
         return result;
 
     }
+
+    public Map<String, Object> getAddMaxLxOrderStartPointRule5(Model model, HttpServletResponse res, HttpServletRequest req) {
+
+
+        String caseCause = req.getParameter("caseCause");
+        String province = req.getParameter("province");
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        return result;
+
+    }
+
 
 }

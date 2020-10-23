@@ -349,4 +349,26 @@ public class BenchmarkPointController {
 
     }
 
+
+    public Map<String, Object> getAddMaxLxOrderBenchmarkPointRule3(Model model, HttpServletResponse res, HttpServletRequest req) {
+
+
+        String caseCause = req.getParameter("caseCause");
+        String province = req.getParameter("province");
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        return result;
+
+    }
+    public Map<String, Object> getAddMaxLxOrderBenchmarkPointRule4(Model model, HttpServletResponse res, HttpServletRequest req) {
+
+
+        String caseCause = req.getParameter("caseCause");
+        String province = req.getParameter("province");
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        return result;
+
+    }
+
 }
