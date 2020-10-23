@@ -498,12 +498,7 @@ public class FactFeaturesController {
         try{
             List<FactFeatures> list = factFeaturesService.getAddMaxLxOrderFactFeature(maxOrderCondition);
             FactFeatures factFeatures = list.get(0);
-            if(factFeatures != null){
-                String fforder = factFeatures.getLxOrder();
-                if(fforder!=null && !"".equals(fforder)){
-                    factFeatures.setLxOrder(String.valueOf(Integer.parseInt(fforder)+1));
-                }
-            }
+
             result.put("list",list);
 
         }catch (Exception e){
@@ -617,5 +612,25 @@ public class FactFeaturesController {
 
     }
 
+    public Map<String, Object> isFactLxExit1(Model model, HttpServletResponse res, HttpServletRequest req) {
+
+        String enName = req.getParameter("enName");
+        String caseCause = req.getParameter("caseCause");
+        String province = req.getParameter("province");
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        return result;
+
+    }
+    public Map<String, Object> isFactLxExit2(Model model, HttpServletResponse res, HttpServletRequest req) {
+
+        String enName = req.getParameter("enName");
+        String caseCause = req.getParameter("caseCause");
+        String province = req.getParameter("province");
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        return result;
+
+    }
 
 }
